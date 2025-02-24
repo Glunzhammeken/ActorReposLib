@@ -10,7 +10,7 @@ using System.Security.Cryptography.X509Certificates;
 namespace ActorReposLib.Tests
 {
     [TestClass()]
-    public class ActorReposTests
+    public class ActorListsTests
     {
         [TestMethod()]
         public void AddTest()

@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace ActorReposLib
 {
-    public class ActorDBContext 
+    public class ActorDBContext : DbContext
     {
-        public static readonly string ConnectionStringLocal = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ActorDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
+        public ActorDBContext(
+            DbContextOptions<ActorDBContext> options) :
+            base(options)
+        { }
+
+        public DbSet<Actor> Actors { get; set; }
     }
 }

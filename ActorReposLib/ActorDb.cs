@@ -7,7 +7,7 @@ using ActorReposLib.Interfaces;
 
 namespace ActorReposLib
 {
-    public class GeneriskRepos<T> where T : class, IIdentifiable
+    public class ActorDb<T> where T : class, IIdentifiable
     {
         private List<T> list = new List<T>();
         private int nextid = 1;

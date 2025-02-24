@@ -7,10 +7,10 @@ using ActorReposLib.Interfaces;
 
 namespace ActorReposLib
 {
-    public class ActorReposDB : IActorRepos
+    public class ActorReposDb : IActorRepos
     {
         private readonly ActorDBContext _Context;
-        public ActorReposDB(ActorDBContext dBContext) 
+        public ActorReposDb(ActorDBContext dBContext) 
         {
             _Context = dBContext;
         }
