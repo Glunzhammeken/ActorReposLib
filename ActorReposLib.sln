@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34601.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActorReposLib", "ActorReposLib\ActorReposLib.csproj", "{6DA7AD6C-585D-4157-834A-1C67B8B6B892}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActorReposLibTests", "ActorReposLibTests\ActorReposLibTests.csproj", "{74182101-9488-4CCF-8472-7D12F7BCB53E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6DA7AD6C-585D-4157-834A-1C67B8B6B892}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DA7AD6C-585D-4157-834A-1C67B8B6B892}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DA7AD6C-585D-4157-834A-1C67B8B6B892}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DA7AD6C-585D-4157-834A-1C67B8B6B892}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74182101-9488-4CCF-8472-7D12F7BCB53E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74182101-9488-4CCF-8472-7D12F7BCB53E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74182101-9488-4CCF-8472-7D12F7BCB53E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74182101-9488-4CCF-8472-7D12F7BCB53E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7A7F5951-8AC0-4DD8-B488-860108027635}
+	EndGlobalSection
+EndGlobal
