@@ -21,9 +21,9 @@ namespace ActorReposLib.Tests
         {
             if (useDatabase)
             {
-                var optionsBuilder = new DbContextOptionsBuilder<ActorDBContext>();
+                var optionsBuilder = new DbContextOptionsBuilder<ActorDbContext>();
                 optionsBuilder.UseSqlServer(DbSecret.ConnectionStringLocal);
-                ActorDBContext _dbContext = new(optionsBuilder.Options);
+                ActorDbContext _dbContext = new(optionsBuilder.Options);
                 _dbContext.Database.ExecuteSqlRaw("TRUNCATE TABLE dbo.Actors");
                 _repo = new ActorReposDb(_dbContext);
             }

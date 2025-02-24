@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ActorReposLib
 {
-    public class ActorDBContext : DbContext
+    public class ActorDbContext : DbContext
     {
-        public ActorDBContext(
-            DbContextOptions<ActorDBContext> options) :
+        public ActorDbContext(
+            DbContextOptions<ActorDbContext> options) :
             base(options)
         { }
 

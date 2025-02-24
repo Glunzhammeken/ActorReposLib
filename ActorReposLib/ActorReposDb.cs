@@ -9,8 +9,8 @@ namespace ActorReposLib
 {
     public class ActorReposDb : IActorRepos
     {
-        private readonly ActorDBContext _Context;
-        public ActorReposDb(ActorDBContext dBContext) 
+        private readonly ActorDbContext _Context;
+        public ActorReposDb(ActorDbContext dBContext) 
         {
             _Context = dBContext;
         }
