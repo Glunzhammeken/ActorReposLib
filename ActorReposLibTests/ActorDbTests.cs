@@ -15,7 +15,7 @@ namespace ActorReposLib.Tests
     {
         private const bool useDatabase = true;
         private static IActorRepos _repo;
-     
+
         [ClassInitialize]
         public static void InitOnce(TestContext context)
         {
@@ -34,7 +34,7 @@ namespace ActorReposLib.Tests
         }
 
         [TestMethod()]
-        public void TestGeneriskGetAll_ReturnsCorrect()
+        public void TestGenericGetAll_ReturnsCorrect()
         {
             // Actors
             Actor actor_John = new Actor { BirthYear = 1999, Name = "John" };
@@ -43,48 +43,45 @@ namespace ActorReposLib.Tests
 
             List<Actor> expectedActors = new List<Actor> { actor_Karl, actor_Børge, actor_John }; //Actor John, Karl og Børge
 
-            ActorDb<Actor> actorDb = new ActorDb<Actor>();
+            _repo.Add(actor_John);
+            _repo.Add(actor_Karl);
+            _repo.Add(actor_Børge);
 
-            actorDb.Add(actor_John);
-            actorDb.Add(actor_Karl);
-            actorDb.Add(actor_Børge);
-
-            List<Actor> actualActors = actorDb.GetList();
+            List<Actor> actualActors = _repo.GetActors();
 
             CollectionAssert.AreEquivalent(expectedActors, actualActors);
+        }
 
-        }
         [TestMethod()]
-        public void TestGetById() 
+        public void TestGetById()
         {
             Actor actor = new Actor();
-            ActorDb<Actor> actorDb = new ActorDb<Actor>();
-            actorDb.Add(actor);
-            
-            Assert.AreEqual(actor,actorDb.GetItemById(actor.Id));
-            Assert.ThrowsException<ArgumentNullException>(() => actorDb.GetItemById(100));
-        }
-        [TestMethod()]
-        public void TestGeneriskAdd()
-        {
-            Actor actor = new Actor();
-            ActorDb<Actor> actorDb = new ActorDb<Actor>();
-            actorDb.Add(actor);
+            _repo.Add(actor);
 
-            Assert.AreEqual(1, actorDb.GetList().Count);
-            Assert.AreEqual(actor, actorDb.GetItemById(actor.Id));
-            Assert.ThrowsException<ArgumentNullException>(() => actorDb.Add(null));
+            Assert.AreEqual(actor, _repo.GetActorById(actor.Id));
+            Assert.ThrowsException<ArgumentNullException>(() => _repo.GetActorById(100));
         }
+
         [TestMethod()]
-        public void RemoveGeneriskTest()
+        public void TestGenericAdd()
         {
             Actor actor = new Actor();
-            ActorDb<Actor> actorDb = new ActorDb<Actor>();
-            actorDb.Add(actor);
-            Assert.AreEqual(1, actorDb.GetList().Count);
-            actorDb.Remove(1);
-            Assert.AreEqual(0, actorDb.GetList().Count);
-            Assert.ThrowsException<ArgumentNullException>(() => actorDb.Remove(100));
+            _repo.Add(actor);
+
+            Assert.AreEqual(1, _repo.GetActors().Count);
+            Assert.AreEqual(actor, _repo.GetActorById(actor.Id));
+            Assert.ThrowsException<ArgumentNullException>(() => _repo.Add(null));
+        }
+
+        [TestMethod()]
+        public void RemoveGenericTest()
+        {
+            Actor actor = new Actor();
+            _repo.Add(actor);
+            Assert.AreEqual(1, _repo.GetActors().Count);
+            _repo.Remove(actor.Id);
+            Assert.AreEqual(0, _repo.GetActors().Count);
+            Assert.ThrowsException<ArgumentNullException>(() => _repo.Remove(100));
         }
     }
 }
