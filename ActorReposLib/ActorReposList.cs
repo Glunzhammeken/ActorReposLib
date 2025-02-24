@@ -15,7 +15,7 @@ namespace ActorReposLib
         private int nextId;
 
 
-        public List<Actor> GetActors(int? Birthyearbefore = null, int? Birthyearafter = null, string? name = null, string? sortBy = null)
+        public IEnumerable<Actor> GetActors(int? Birthyearbefore = null, int? Birthyearafter = null, string? name = null, string? sortBy = null)
         {
             List<Actor> actorsreturn = new List<Actor>();
             actorsreturn = actors.Where(a => (Birthyearbefore == null || a.BirthYear < Birthyearbefore) &&

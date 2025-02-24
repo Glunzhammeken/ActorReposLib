@@ -2,5 +2,5 @@ namespace ActorReposLib;
 
 public class DbSecret
 { 
-    public static readonly string ConnectionStringLocal = "Server=localhost,1433;Database=master;User Id=SA;Password=Adminpassword1!;TrustServerCertificate=True;\n";
+    public static readonly string ConnectionStringLocal = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ActorDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
 }

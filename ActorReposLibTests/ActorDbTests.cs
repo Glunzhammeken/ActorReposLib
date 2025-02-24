@@ -43,7 +43,7 @@ namespace ActorReposLib.Tests
 
             List<Actor> expectedActors = new List<Actor> { actor_Karl, actor_Børge, actor_John }; //Actor John, Karl og Børge
 
-            ActorDb<Actor> actorDb = new ActorDb<Actor>();
+            GeneriskRepos<Actor> actorDb = new GeneriskRepos<Actor>();
 
             actorDb.Add(actor_John);
             actorDb.Add(actor_Karl);
@@ -58,7 +58,7 @@ namespace ActorReposLib.Tests
         public void TestGetById() 
         {
             Actor actor = new Actor();
-            ActorDb<Actor> actorDb = new ActorDb<Actor>();
+            GeneriskRepos<Actor> actorDb = new GeneriskRepos<Actor>();
             actorDb.Add(actor);
             
             Assert.AreEqual(actor,actorDb.GetItemById(actor.Id));
@@ -68,7 +68,7 @@ namespace ActorReposLib.Tests
         public void TestGeneriskAdd()
         {
             Actor actor = new Actor();
-            ActorDb<Actor> actorDb = new ActorDb<Actor>();
+            GeneriskRepos<Actor> actorDb = new GeneriskRepos<Actor>();
             actorDb.Add(actor);
 
             Assert.AreEqual(1, actorDb.GetList().Count);
@@ -79,7 +79,7 @@ namespace ActorReposLib.Tests
         public void RemoveGeneriskTest()
         {
             Actor actor = new Actor();
-            ActorDb<Actor> actorDb = new ActorDb<Actor>();
+            GeneriskRepos<Actor> actorDb = new GeneriskRepos<Actor>();
             actorDb.Add(actor);
             Assert.AreEqual(1, actorDb.GetList().Count);
             actorDb.Remove(1);

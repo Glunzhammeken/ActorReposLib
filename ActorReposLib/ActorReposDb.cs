@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using ActorReposLib.Interfaces;
@@ -9,34 +10,78 @@ namespace ActorReposLib
 {
     public class ActorReposDb : IActorRepos
     {
-        private readonly ActorDbContext _Context;
-        public ActorReposDb(ActorDbContext dBContext) 
+        private readonly ActorDbContext _context;
+        public ActorReposDb(ActorDbContext DbContext) 
         {
-            _Context = dBContext;
+            _context = DbContext;
         }
         public Actor Add(Actor actor)
         {
-            throw new NotImplementedException();
+            actor.Id = 0;
+            _context.Actors.Add(actor);
+            _context.SaveChanges();
+            return actor;
         }
 
         public Actor? GetActorById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Actors.FirstOrDefault(a => a.Id == id);
         }
 
-        public List<Actor> GetActors(int? Birthyearbefore = null, int? Birthyearafter = null, string? name = null, string? sortBy = null)
+        public IEnumerable<Actor> GetActors(int? Birthyearbefore = null, int? Birthyearafter = null, string? name = null, string? sortBy = null)
         {
-            throw new NotImplementedException();
+            IQueryable<Actor> query = _context.Actors.ToList().AsQueryable();
+
+            query.Where(a => (Birthyearbefore == null || a.BirthYear < Birthyearbefore) &&
+                            (Birthyearafter == null || a.BirthYear > Birthyearafter) &&
+                            (string.IsNullOrEmpty(name) || a.Name.Contains(name, StringComparison.OrdinalIgnoreCase)));
+
+            if (!string.IsNullOrEmpty(sortBy))
+            {
+                sortBy = sortBy.ToLower();
+                switch (sortBy)
+                {
+                    case "NameSort":
+                        query = query.OrderBy(a => a.Name);
+                        break;
+                    case "Ascending":
+                        query = query.OrderBy(a => a.BirthYear);
+                        break;
+                    case "Descending":
+                        query = query.OrderByDescending(a => a.BirthYear);
+                        break;
+                    default: break;
+                }
+            }
+
+            return query;
         }
 
         public Actor Remove(int id)
         {
-            throw new NotImplementedException();
+            Actor? actor = GetActorById(id);
+            if (actor == null) 
+            {
+                return null;
+            }
+            _context.Actors.Remove(actor);
+            _context.SaveChanges();
+            return actor;
         }
 
         public Actor? UpdateActor(int id, Actor nyData)
         {
-            throw new NotImplementedException();
+            Actor? actor_ToUpdate = GetActorById(id);
+            if (actor_ToUpdate == null)
+            {
+                return null;
+            }
+            actor_ToUpdate.Name = nyData.Name;
+            actor_ToUpdate.BirthYear = nyData.BirthYear;
+            _context.SaveChanges();
+            return actor_ToUpdate;
+
+
         }
     }
 }
