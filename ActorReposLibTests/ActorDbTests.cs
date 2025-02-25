@@ -15,7 +15,7 @@ namespace ActorReposLib.Tests
     {
         private const bool useDatabase = true;
         private static IActorRepos _repo;
-     
+
         [ClassInitialize]
         public static void InitOnce(TestContext context)
         {
@@ -34,7 +34,7 @@ namespace ActorReposLib.Tests
         }
 
         [TestMethod()]
-        public void TestGeneriskGetAll_ReturnsCorrect()
+        public void TestGenericGetAll_ReturnsCorrect()
         {
             // Actors
             Actor actor_John = new Actor { BirthYear = 1999, Name = "John" };
@@ -45,17 +45,13 @@ namespace ActorReposLib.Tests
 
             GeneriskRepos<Actor> actorDb = new GeneriskRepos<Actor>();
 
-            actorDb.Add(actor_John);
-            actorDb.Add(actor_Karl);
-            actorDb.Add(actor_Børge);
-
-            List<Actor> actualActors = actorDb.GetList();
+            List<Actor> actualActors = _repo.GetActors();
 
             CollectionAssert.AreEquivalent(expectedActors, actualActors);
-
         }
+
         [TestMethod()]
-        public void TestGetById() 
+        public void TestGetById()
         {
             Actor actor = new Actor();
             GeneriskRepos<Actor> actorDb = new GeneriskRepos<Actor>();
@@ -64,19 +60,21 @@ namespace ActorReposLib.Tests
             Assert.AreEqual(actor,actorDb.GetItemById(actor.Id));
             Assert.ThrowsException<ArgumentNullException>(() => actorDb.GetItemById(100));
         }
+
         [TestMethod()]
-        public void TestGeneriskAdd()
+        public void TestGenericAdd()
         {
             Actor actor = new Actor();
             GeneriskRepos<Actor> actorDb = new GeneriskRepos<Actor>();
             actorDb.Add(actor);
 
-            Assert.AreEqual(1, actorDb.GetList().Count);
-            Assert.AreEqual(actor, actorDb.GetItemById(actor.Id));
-            Assert.ThrowsException<ArgumentNullException>(() => actorDb.Add(null));
+            Assert.AreEqual(1, _repo.GetActors().Count);
+            Assert.AreEqual(actor, _repo.GetActorById(actor.Id));
+            Assert.ThrowsException<ArgumentNullException>(() => _repo.Add(null));
         }
+
         [TestMethod()]
-        public void RemoveGeneriskTest()
+        public void RemoveGenericTest()
         {
             Actor actor = new Actor();
             GeneriskRepos<Actor> actorDb = new GeneriskRepos<Actor>();
